@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="BitmapHelpers.cs" />
     <Compile Include="ComputerVision.cs" />
+    <Compile Include="FaceID.cs" />
     <Compile Include="Tradutor\DataMarketAcessToken.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

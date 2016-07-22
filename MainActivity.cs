@@ -77,12 +77,29 @@ namespace CameraAppDemo
                     textoParaVoz.Speak($"Com confiança de {conf} porcento, eu vejo {descricao}");
                 }
 
+                //reconhecendo rosto.
+
+                textoParaVoz.Speak("Reconhecendo rostos");
+
+                string JsonRespostaFace = await FaceID.DescreverFace(bitmapData);
+                RespostaFaceID[] respostaFace = JsonConvert.DeserializeObject<RespostaFaceID[]>(JsonRespostaFace);
+
+                if (respostaFace.Length == 0)
+                    textoParaVoz.Speak("Nenhum rosto identificado.");
+                else {
+                    var idade = respostaFace[0].faceAttributes.age;
+                    string sexo = (respostaFace[0].faceAttributes.gender == "male") ? "homem" : "mulher";
+                    textoParaVoz.Speak($"Eu vejo um {sexo} de aproximadamente {idade} anos");
+                }
+
+
                 App.bitmap = null;
             }
 
             // Dispose of the Java side bitmap.
             GC.Collect();
         }
+        
 
         protected override void OnCreate(Bundle bundle)
         {
